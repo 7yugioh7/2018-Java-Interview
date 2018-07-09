@@ -1,9 +1,4 @@
 ## 集合
-### List、Set、Map区别
-Set中的对象不按特定方式排序，并且没有重复对象。但它的有些实现类能对集合中的对象按特定方式排序，例如TreeSet类，它可以按照默认排序，也可以通过实现java.util.Comparator<Type>接口来自定义排序方式。  
-List中的对象按照索引位置排序，可以有重复对象，允许按照对象在集合中的索引位置检索对象，如通过list.get(i)方式来获得List集合中的元素。  
-Map中的每一个元素包含一个键对象和值对象，它们成对出现。键对象不能重复，值对象可以重复。
-
 ### ArrayList与LinkedList区别
 
 |ArrayList|LinkedList|
@@ -12,6 +7,12 @@ Map中的每一个元素包含一个键对象和值对象，它们成对出现�
 |增删的时候在扩容的时候慢，通过索引查询快，通过对象查索引慢|增删快，通过索引查询慢，通过对象查索引慢|
 |当数组无法容纳下此次添加的元素时进行扩容|无|
 |扩容之后容量为原来的1.5倍|无|
+
+### ArrayList与Vector区别 
+
+1. Vector是线程安全的，源码中有很多的synchronized可以看出，而ArrayList不是。导致Vector效率无法和ArrayList相比； 
+2. ArrayList和Vector都采用线性连续存储空间，当存储空间不足的时候，ArrayList默认增加为原来的50%，Vector默认增加为原来的一倍； 
+3. Vector可以设置capacityIncrement，而ArrayList不可以，从字面理解就是capacity容量，Increment增加，容量增长的参数。
 
 ### HashMap
 [面试必问的几个点](http://www.importnew.com/7099.html)
@@ -22,11 +23,7 @@ Map中的每一个元素包含一个键对象和值对象，它们成对出现�
 
 (3)针对这种情况，JDK 1.8 中引入了红黑树（查找时间复杂度为 O(logn)）来优化这个问题
 
-### HashMap和HashTable区别
-1. Hashtable中的方法是同步的，而HashMap中的方法在缺省情况下是非同步的。
-2. Hashtable中，key和value都不允许出现null值。HashMap中，null可以作为键，这样的键只有一个，可以有一个或多个键所对应的值为null。
-3. 哈希值的使用不同，HashTable直接使用对象的hashCode。而HashMap重新计算hash值。
-4. Hashtable和HashMap它们两个内部实现方式的数组的初始大小和扩容的方式。
+(4)为什么线程不安全？多线程PUT操作时可能会覆盖刚PUT进去的值；扩容操作会让链表形成环形数据结构，形成死循环
 
 ### ConcurrentHashMap原理
 [http://www.jasongj.com/java/concurrenthashmap/](http://www.jasongj.com/java/concurrenthashmap/)
